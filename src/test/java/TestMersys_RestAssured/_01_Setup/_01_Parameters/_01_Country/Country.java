@@ -1,4 +1,4 @@
-package TestMersys_RestAssured._01_Setup._01_Parameters._1_Country;
+package TestMersys_RestAssured._01_Setup._01_Parameters._01_Country;
 
 import TestMersys_RestAssured._01_Variables.Variables;
 import io.restassured.builder.RequestSpecBuilder;
@@ -14,7 +14,6 @@ import static io.restassured.RestAssured.baseURI;
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.Matchers.containsString;
 import static org.hamcrest.Matchers.equalTo;
-import static sun.security.util.KnownOIDs.CountryName;
 
 public class Country extends Variables {
 

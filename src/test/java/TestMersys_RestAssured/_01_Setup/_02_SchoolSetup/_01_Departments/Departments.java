@@ -1,4 +1,4 @@
-package TestMersys_RestAssured._01_Setup._02_SchoolSetup._1_Departments;
+package TestMersys_RestAssured._01_Setup._02_SchoolSetup._01_Departments;
 
 import TestMersys_RestAssured._01_Variables.Variables;
 import io.restassured.builder.RequestSpecBuilder;

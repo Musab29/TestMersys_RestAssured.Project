@@ -1,4 +1,4 @@
-package TestMersys_RestAssured._01_Setup._01_Parameters._3_GradeLevels;
+package TestMersys_RestAssured._01_Setup._01_Parameters._07_Nationalities;
 
 import TestMersys_RestAssured._01_Variables.Variables;
 import io.restassured.builder.RequestSpecBuilder;
@@ -15,9 +15,9 @@ import static io.restassured.RestAssured.given;
 import static org.hamcrest.Matchers.containsString;
 import static org.hamcrest.Matchers.equalTo;
 
-public class GradeLevels extends Variables {
+public class Nationalities extends Variables {
 
-    Map<String, String> gradeLevel;
+    Map<String, String> Nationalities;
 
     @BeforeClass
     public void Setup(){
@@ -46,109 +46,109 @@ public class GradeLevels extends Variables {
                 .build();
 
         System.out.println("Login Test: Successfully passed !");
+
     }
-    @Test
-    public void createGradeLevel() {
 
-        gradeLevel = new HashMap<>();
-        gradelevelName = faker.name().firstName() + faker.number().digits(5);
-        gradelevelShortName = faker.name().lastName() + faker.number().digits(5);
-        gradeLevel.put("name", gradelevelName);
-        gradeLevel.put("shortName", gradelevelShortName);
 
-        gradelevelID =
+
+
+    @Test(priority = 1)
+    public void createNationalities() {
+
+        Nationalities = new HashMap<>();
+
+        NationalitiesName = "serdar" + faker.number().digits(3);
+        Nationalities.put("name", NationalitiesName);
+
+        NationalitiesID =
 
                 given()
                         .spec(reqSpec)
-                        .body(gradeLevel)
+                        .body(Nationalities)
                         //.log().body()
                         .when()
-                        .post(url+"grade-levels")
+                        .post(url+"nationality")
                         .then()
                         //.log().body()
                         .statusCode(201)
                         .extract().path("id");
 
-        System.out.println("Create Grade Level Test: Successfully passed !");
-
+        System.out.println("Create Nationalities Test: Successfully passed !");
     }
 
+    @Test(priority = 2, dependsOnMethods = "createNationalities")
+    public void createNationalitiesNegative() {
 
-    @Test(dependsOnMethods = "createGradeLevel")
-    public void createGradeLevelNegative() {
-
-        gradeLevel.put("name", gradelevelName);
-        gradeLevel.put("shortName", gradelevelShortName);
+        Nationalities.put("name", NationalitiesName);
 
         given()
 
                 .spec(reqSpec)
-                .body(gradeLevel)
+                .body(Nationalities)
                 //.log().body()
                 .when()
-                .post(url+"grade-levels")
+                .post(url+"nationality")
                 .then()
                 //.log().body()
                 .statusCode(400)
                 .body("message", containsString("already"));
 
-        System.out.println("Create Grade Level Negative Test: Successfully passed !");
-
+        System.out.println("Create Nationalities Negative Test: Successfully passed !");
     }
 
+    @Test(priority = 3, dependsOnMethods = "createNationalitiesNegative")
+    public void updateNationalities() {
 
-    @Test(dependsOnMethods = "createGradeLevelNegative")
-    public void updateGradeLevel() {
+        NationalitiesName = "Test" + faker.number().digits(5);
 
-        gradeLevel.put("id", gradelevelID);
-        gradelevelName = ("Test" + faker.number().digits(5));
-        gradeLevel.put("name", gradelevelName);
-        gradeLevel.put("shortName", gradelevelShortName);
+        Nationalities.put("id", NationalitiesID);
+        Nationalities.put("name", NationalitiesName);
 
         given()
 
                 .spec(reqSpec)
-                .body(gradeLevel)
+                .body(Nationalities)
                 // .log().body()
                 .when()
-                .put(url+"grade-levels")
+                .put(url+"nationality")
                 .then()
-                //.log().body()
+                //.log().body() // show incoming body as log
                 .statusCode(200)
-                .body("id", equalTo(gradelevelID));
+                .body("name", equalTo(NationalitiesName));
 
-        System.out.println("Update Grade Level Test: Successfully passed !");
-
+        System.out.println("Update Nationalities Test: Successfully passed !");
     }
 
-    @Test(dependsOnMethods = "updateGradeLevel")
-    public void deleteGradeLevel() {
+    @Test(priority = 4, dependsOnMethods = "updateNationalities")
+    public void deleteNationalities(){
 
         given()
 
                 .spec(reqSpec)
                 .when()
-                .delete(url+"grade-levels/"+gradelevelID)
+                .delete(url+"nationality/" + NationalitiesID)
                 .then()
                 //.log().body()
                 .statusCode(200);
 
-        System.out.println("Delete Grade Level Test: Successfully passed !");
+        System.out.println("Delete Nationalities Test: Successfully passed !");
 
     }
 
-    @Test(priority = 5,dependsOnMethods = "deleteGradeLevel")
-    public void deleteGradeLevelNegative() {
+    @Test (priority = 5, dependsOnMethods = "deleteNationalities")
+    public void deleteNationalitiesNegative(){
+
         given()
 
                 .spec(reqSpec)
                 .when()
-                .delete(url+"grade-levels/"+gradelevelID)
+                .delete(url+"nationality/" + NationalitiesID)
                 .then()
                 //.log().body()
                 .statusCode(400)
-                .body("message", equalTo("Grade Level not found."));
+                .body("message", equalTo("Nationality not  found"));
 
-        System.out.println("Delete Grade Level Negative Test: Successfully passed !");
+        System.out.println("Delete Nationalities Negative Test: Successfully passed !");
     }
 }
+

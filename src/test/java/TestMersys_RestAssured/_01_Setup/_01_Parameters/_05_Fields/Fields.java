@@ -1,4 +1,4 @@
-package TestMersys_RestAssured._01_Setup._01_Parameters._6_Discounts;
+package TestMersys_RestAssured._01_Setup._01_Parameters._05_Fields;
 
 import TestMersys_RestAssured._01_Variables.Variables;
 import io.restassured.builder.RequestSpecBuilder;
@@ -15,10 +15,9 @@ import static io.restassured.RestAssured.given;
 import static org.hamcrest.Matchers.containsString;
 import static org.hamcrest.Matchers.equalTo;
 
-public class Discounts extends Variables {
+public class Fields extends Variables {
 
-
-    Map<String, String> discount;
+    Map<String,String> fields=new HashMap<>();
 
     @BeforeClass
     public void Setup(){
@@ -50,106 +49,105 @@ public class Discounts extends Variables {
 
     }
 
-
     @Test(priority = 1)
-    public void createDiscounts() {
-        discount = new HashMap<>();
-        discountDescription = faker.nation().nationality() + faker.number().digits(5);
-        discountCode = faker.code().asin() + faker.number().digits(5);
+    public void createFields() {
 
-        discount.put("description", discountDescription);
-        discount.put("code", discountCode);
 
-        discountID =
+        fieldName="field-"+faker.number().digits(3);
+        fieldCode=faker.number().digits(5);
+        fields.put("name",fieldName);
+        fields.put("code",fieldCode);
+        fields.put("type","STRING");
+        fields.put("schoolId","6390f3207a3bcb6a7ac977f9");
+
+        fieldID=
                 given()
-
                         .spec(reqSpec)
-                        .body(discount)
+                        .body(fields)
                         //.log().body()
                         .when()
-                        .post(url+"discounts")
+                        .post(url+"entity-field")
                         .then()
                         //.log().body()
                         .statusCode(201)
                         .extract().path("id");
 
-        System.out.println("Create Discounts Test: Successfully passed !");
-
+        System.out.println("Create Fields Test: Successfully passed !");
     }
 
-    @Test(priority = 2,dependsOnMethods = "createDiscounts")
-    public void createDiscountsNegative() {
-        discount.put("description", discountDescription);
-        discount.put("code", discountCode);
-
+    @Test(priority = 2,dependsOnMethods = "createFields")
+    public void createFieldsNegative() {
 
         given()
 
                 .spec(reqSpec)
-                .body(discount)
+                .body(fields)
                 //.log().body()
                 .when()
-                .post(url+"discounts")
+                .post(url+"entity-field")
                 .then()
                 //.log().body()
                 .statusCode(400)
-                .body("message", containsString("already"));
+                .body("message", containsString("already exists"));
 
-        System.out.println("Create Discount Negative Test: Successfully passed !");
+        System.out.println("Create Fields Negative Test: Successfully passed !");
+
 
     }
+    @Test(priority = 3, dependsOnMethods = "createFields")
+    public void updateFields() {
 
-    @Test(priority = 3,dependsOnMethods = "createDiscountsNegative")
-    public void updateDiscounts() {
-        discount.put("id", discountID);
-
-        discountDescription = ("Test" + faker.number().digits(5));
-        discount.put("description", discountDescription);
-        discount.put("code", discountCode);
+        newfieldName="field-"+faker.number().digits(2);
+        newfieldCode=faker.number().digits(3);
+        fields.put("name",newfieldName);
+        fields.put("code",newfieldCode);
+        fields.put("id", fieldID);
 
         given()
-
                 .spec(reqSpec)
-                .body(discount)
-                // .log().body()
+                .body(fields)
+                //.log().body()
                 .when()
-                .put(url+"discounts")
+                .put(url+"entity-field")
                 .then()
                 //.log().body()
                 .statusCode(200)
-                .body("description", equalTo(discountDescription));
+                .body("name", equalTo(newfieldName));
 
-        System.out.println("Update Discount Test: Successfully passed !");
+        System.out.println("Update Fields Test: Successfully passed !");
 
     }
 
-    @Test(priority = 4,dependsOnMethods = "updateDiscounts")
-    public void deleteDiscounts() {
-        given()
+    @Test(priority = 4, dependsOnMethods = "updateFields")
+    public void deleteFields()  {
 
+        given()
                 .spec(reqSpec)
                 .when()
-                .delete(url+"discounts/"+discountID)
+                .delete(url+"entity-field/"+ fieldID)
                 .then()
                 //.log().body()
-                .statusCode(200);
+                .statusCode(204);
 
-        System.out.println("Delete Discount Test: Successfully passed !");
+        System.out.println("Delete Fields Test: Successfully passed !");
+
     }
 
-    @Test(priority = 5,dependsOnMethods = "deleteDiscounts")
-    public void deleteDiscountsNegative() {
-        given()
+    @Test(priority = 5, dependsOnMethods = "deleteFields")
+    public void deleteFieldsNegative() {
 
+        given()
                 .spec(reqSpec)
                 .when()
-                .delete(url+"discounts/"+discountID)
+                .delete(url+"entity-field/"+ fieldID)
                 .then()
                 //.log().body()
                 .statusCode(400)
-                .body("message", equalTo("Discount not found"));
+                .body("message", equalTo("EntityField not found"));
 
-        System.out.println("Delete Discounts Negative Test: Successfully passed !");
+        System.out.println("Delete Fields Negative Test: Successfully passed !");
 
     }
 }
+
+

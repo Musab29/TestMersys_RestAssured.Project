@@ -1,4 +1,4 @@
-package TestMersys_RestAssured._01_Setup._01_Parameters._4_DocumentTypes;
+package TestMersys_RestAssured._01_Setup._01_Parameters._04_DocumentTypes;
 
 import TestMersys_RestAssured._01_Variables.Variables;
 import io.restassured.builder.RequestSpecBuilder;

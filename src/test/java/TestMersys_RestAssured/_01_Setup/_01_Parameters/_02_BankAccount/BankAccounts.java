@@ -1,4 +1,4 @@
-package TestMersys_RestAssured._01_Setup._01_Parameters._2_BankAccount;
+package TestMersys_RestAssured._01_Setup._01_Parameters._02_BankAccount;
 
 import TestMersys_RestAssured._01_Variables.Variables;
 import io.restassured.builder.RequestSpecBuilder;
