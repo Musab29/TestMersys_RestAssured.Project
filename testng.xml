@@ -3,19 +3,19 @@
 <suite name="All Test Suite">
     <test name="Main Test">
         <classes>
-            <class name="TestMersyIo_RestAssured._01_Setup._01_Parameters._01_Country.Country"></class>
-            <class name="TestMersyIo_RestAssured._01_Setup._01_Parameters._02_BankAccount.BankAccounts"></class>
-            <class name="TestMersyIo_RestAssured._01_Setup._01_Parameters._03_GradeLevels.GradeLevels"></class>
-            <class name="TestMersyIo_RestAssured._01_Setup._01_Parameters._04_DocumentTypes.DocumentTypes"></class>
-            <class name="TestMersyIo_RestAssured._01_Setup._01_Parameters._05_Fields.Fields"></class>
-            <class name="TestMersyIo_RestAssured._01_Setup._01_Parameters._06_Discounts.Discounts"></class>
-            <class name="TestMersyIo_RestAssured._01_Setup._01_Parameters._07_Nationalities.Nationalities"></class>
-            <class name="TestMersyIo_RestAssured._01_Setup._02_SchoolSetup._01_Departments.Departments"></class>
-            <class name="TestMersyIo_RestAssured._01_Setup._02_SchoolSetup._02_Locations.Locations"></class>
-            <class name="TestMersyIo_RestAssured._03_HumanResources._01_Positions.Positions"></class>
-            <class name="TestMersyIo_RestAssured._03_HumanResources._02_Attestations.Attestations"></class>
-            <class name="TestMersyIo_RestAssured._03_HumanResources._03_PositionCategories.PositionCategories"></class>
-            <class name="TestMersyIo_RestAssured._04_Education._01_SubjectCategories.SubjectCategories"></class>
+            <class name="TestMersys_RestAssured._01_Setup._01_Parameters._01_Country.Country"></class>
+            <class name="TestMersys_RestAssured._01_Setup._01_Parameters._02_BankAccount.BankAccounts"></class>
+            <class name="TestMersys_RestAssured._01_Setup._01_Parameters._03_GradeLevels.GradeLevels"></class>
+            <class name="TestMersys_RestAssured._01_Setup._01_Parameters._04_DocumentTypes.DocumentTypes"></class>
+            <class name="TestMersys_RestAssured._01_Setup._01_Parameters._05_Fields.Fields"></class>
+            <class name="TestMersys_RestAssured._01_Setup._01_Parameters._06_Discounts.Discounts"></class>
+            <class name="TestMersys_RestAssured._01_Setup._01_Parameters._07_Nationalities.Nationalities"></class>
+            <class name="TestMersys_RestAssured._01_Setup._02_SchoolSetup._01_Departments.Departments"></class>
+            <class name="TestMersys_RestAssured._01_Setup._02_SchoolSetup._02_Locations.Locations"></class>
+            <class name="TestMersys_RestAssured._03_HumanResources._01_Positions.Positions"></class>
+            <class name="TestMersys_RestAssured._03_HumanResources._02_Attestations.Attestations"></class>
+            <class name="TestMersys_RestAssured._03_HumanResources._03_PositionCategories.PositionCategories"></class>
+            <class name="TestMersys_RestAssured._04_Education._01_SubjectCategories.SubjectCategories"></class>
         </classes>
     </test>
 </suite>
